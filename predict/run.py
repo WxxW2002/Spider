@@ -12,10 +12,10 @@ import pickle
 import sys
 
 if __name__ == '__main__':
-    # df = pd.read_csv('./data/house_processed.csv')
-    df = pd.read_csv('./data/house_with_embeddings.csv')
+    df = pd.read_csv('./data/house_processed.csv')
+    # df = pd.read_csv('./data/house_with_embeddings.csv')
 
-    X = df.drop(['Title', 'Subtitle', 'Average'], axis=1)
+    X = df.drop(['Title', 'Subtitle', 'Total', 'Average'], axis=1)
     y = df['Average']
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=666)
