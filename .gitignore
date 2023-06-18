@@ -4,6 +4,7 @@ prompts/
 *tmp*
 *~*
 models/
+predict/out/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

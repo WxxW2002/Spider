@@ -4,6 +4,8 @@ import torch.optim as optim
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import numpy as np
+from tqdm import tqdm
 
 # 加载数据
 data = pd.read_csv('data/house_with_embeddings.csv')
@@ -49,16 +51,26 @@ net = Net()
 criterion = nn.MSELoss()
 optimizer = optim.Adam(net.parameters(), lr=0.001)
 
+# 定义存储MSE的NumPy数组
+mse_lst = []
+
 # 训练神经网络
-num_epochs = 10000
-for epoch in range(num_epochs):
+num_epochs = 500000
+bar = tqdm(range(num_epochs))
+for epoch in bar:
     optimizer.zero_grad()
     outputs = net(X_train)
     loss = criterion(outputs, y_train.unsqueeze(1))
     loss.backward()
     optimizer.step()
-    if (epoch+1) % 100 == 0:
-        print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
+
+    bar.set_description(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
+
+    # 保存MSE值
+    if (epoch+1) % 5000 == 0:
+        mse = criterion(net(X_train), y_train.unsqueeze(1))
+        mse_lst.append(mse.item())
+        np.save(f'out/data/mse_{epoch+1}.npy', np.array(mse_lst))
 
 # 在测试集上进行预测
 with torch.no_grad():
@@ -70,3 +82,7 @@ with torch.no_grad():
 print('均方误差 (MSE):', mse.item())
 print('平均绝对误差 (MAE):', mae.item())
 print('决定系数 (R^2):', r2.item())
+
+# 将mse_lst转换为NumPy数组并保存最终的MSE值
+mse_arr = np.array(mse_lst)
+np.save('out/data/mse_final.npy', mse_arr)
