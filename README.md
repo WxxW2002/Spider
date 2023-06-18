@@ -37,3 +37,24 @@ File Structure
     * `delete_used_urls.py` - delete used html urls
 * `scrapy.cfg` - scrapy project code, define settings
 * `README.md` - README file
+
+Data Preprocess
+--------------
+```bash
+# 数据预处理
+python ./preprocess.py
+# 词嵌入
+python ./word_embedding.py
+```
+
+Model Prediction
+--------------
+```bash
+# 传统模型预测（后两个参数只在Model为Multi-layer Perceptron时起效果）
+python ./run.py --model [Model Name] --hidden_layer_sizes [隐藏层大小] --max_iter [最大迭代次数]
+# 运行所有预测模型
+chmod +x ./run.sh
+./run.sh
+# 神经网络预测
+python ./nn_pred.py
+```
