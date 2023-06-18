@@ -10,8 +10,6 @@ from tqdm import tqdm
 # 加载数据
 data = pd.read_csv('data/house_with_embeddings.csv')
 
-# df = pd.read_csv('./data/house_with_embeddings.csv')
-
 X = data.drop(['Title', 'Subtitle', 'Total', 'Average'], axis=1)
 X = X.values
 feat = X.shape[1]
@@ -55,7 +53,7 @@ optimizer = optim.Adam(net.parameters(), lr=0.001)
 mse_lst = []
 
 # 训练神经网络
-num_epochs = 500000
+num_epochs = 50000
 bar = tqdm(range(num_epochs))
 for epoch in bar:
     optimizer.zero_grad()

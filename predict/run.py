@@ -6,7 +6,9 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor, BaggingRegressor, GradientBoostingRegressor
 from sklearn.svm import SVR
 from sklearn.neural_network import MLPRegressor
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+import numpy as np
 from tqdm import tqdm
 import pickle
 import sys
@@ -17,6 +19,10 @@ if __name__ == '__main__':
 
     X = df.drop(['Title', 'Subtitle', 'Total', 'Average'], axis=1)
     y = df['Average']
+    y = y / 10000 # unit of measure
+    # scaler = MinMaxScaler()
+    # X = scaler.fit_transform(X)
+    X = X.values
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=666)
 
@@ -50,9 +56,9 @@ if __name__ == '__main__':
         model = MLPRegressor(hidden_layer_sizes=hidden_layer_sizes, max_iter=args.max_iter)
 
     print('Training...')
-    model.fit(X_train.values, y_train)
+    model.fit(X_train, y_train)
 
-    y_pred = model.predict(X_test.values)
+    y_pred = model.predict(X_test)
     results = pd.DataFrame({'y_test': y_test, 'y_pred': y_pred})
     results.to_csv(f'out/prediction/{args.model}.csv', index=False)
 
