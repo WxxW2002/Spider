@@ -19,6 +19,15 @@ File Structure
     * `middlewares.py` - scrapy project code, define middlewares
     * `pipelines.py`- scrapy project code, define pipelines
     * `settings.py` - scrapy project code, define settings
+* `predict` - data preprocess and model train
+    * `data/` - data after preprocess
+    * `out/` - output directory
+    * `nn_pred.py` - prediction
+    * `preprocess.py` - data proprecess
+    * `run.py` - model definition and train
+    * `run.sh` - run script
+    * `title_wordcloud.py` - make wordcloud for titles
+    * `word_embedding.py` - word embedding
 * `utils/` - tool function
     * `baidu_get_LLitude.py` - get coordinates from baidu map
     * `gaode_get_LLitude.py` - get coordinates from gaode map
