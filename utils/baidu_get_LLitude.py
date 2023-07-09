@@ -3,7 +3,7 @@ import requests
 import time
 
 def geocode_address(address):
-    api_key = '2izbeCnX1veV26a7SIYNO7z3uCZSdZXo' 
+    api_key = 'xxx' 
     geocode_url = 'http://api.map.baidu.com/geocoding/v3/'
     params = {
         'address': address,
