@@ -3,7 +3,7 @@ import requests
 import time
 
 def geocode_address(address):
-    api_key = '2f294705f67cb1bd7d3bf0f22df89bf2'
+    api_key = 'xxx'
     geocode_url = 'https://restapi.amap.com/v3/geocode/geo'
     params = {
         'address': address,
