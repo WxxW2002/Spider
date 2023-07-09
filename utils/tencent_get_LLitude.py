@@ -3,7 +3,7 @@ import requests
 import time
 
 def geocode_address(address):
-    api_key = 'GCTBZ-65YCZ-IXQXN-ZHIEA-HM67S-K2BWL' 
+    api_key = 'xxxx' 
     geocode_url = 'https://apis.map.qq.com/ws/geocoder/v1/'
     params = {
         'address': address,
